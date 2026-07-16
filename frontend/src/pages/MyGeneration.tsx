@@ -3,6 +3,8 @@ import SoftBackDrop from '../components/SoftBackDrop'
 import { dummyThumbnails, type IThumbnail } from '../assets/assets'
 import { Link, useNavigate } from 'react-router-dom'
 import { ArrowUpRightIcon, DownloadIcon, TrashIcon } from 'lucide-react'
+import toast from 'react-hot-toast'
+import api from '../configs/api'
 
 const MyGeneration = () => {
   const navigate=useNavigate()
@@ -23,8 +25,18 @@ const MyGeneration = () => {
   const handleDownload=(image_url:string)=>{
     window.open(image_url,'_blank')
   }
-  const handleDelete=(id:string)=>{
-    console.log(id);
+  const handleDelete=async (id:string)=>{
+    try {
+      const confirm=window.confirm('Are you sure you want to delete this thumbnail ?')
+      if(!confirm) return;
+
+      const{data}=await api.delete(`/api/thumbnail/delete/${id}`)
+      toast.success(data.message)
+      setThumbnails(thumbnails.filter((thumbnail)=>thumbnail._id!==id))
+    } catch (error:any) {
+      console.error(error);
+      toast.error(error?.response?.data?.message || error.message)
+    }
   }
   useEffect(()=>{ 
     fetchThumbnails()
