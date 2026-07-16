@@ -14,7 +14,7 @@ const thumbnail_routes_1 = __importDefault(require("./routes/thumbnail.routes"))
 const user_routes_1 = __importDefault(require("./routes/user.routes"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)({
-    origin: ['http://localhost:5173', 'http://localhost:3000'],
+    origin: ['http://localhost:5173', 'http://localhost:3000', "https://thumblify-client-eight-gamma.vercel.app"],
     credentials: true
 }));
 app.use((0, express_session_1.default)({
