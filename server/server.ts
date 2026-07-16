@@ -18,7 +18,7 @@ declare module 'express-session' {
 const app = express();
 
 app.use(cors({
-    origin: ['http://localhost:5173', 'http://localhost:3000',"https://thumblify-client-eight-gamma.vercel.app/"],
+    origin: ['http://localhost:5173', 'http://localhost:3000',"https://thumblify-client-eight-gamma.vercel.app"],
     credentials: true
 }))
 app.use(session({
